@@ -1,2 +1,2 @@
 # Programming
-Journey of Programming with proper implementation of DSA
+Journey of Programming with proper implementation of Data Structures and Algorithms!
