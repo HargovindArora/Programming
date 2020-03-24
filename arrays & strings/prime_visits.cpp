@@ -2,7 +2,7 @@
 #include<cmath>
 using namespace std;
 
-bool primes[1000000];
+bool primes[1000000]={false};
 
 void generatePrimes(){
 	for(int i=3; i<=1000000; i+=2){
@@ -10,10 +10,10 @@ void generatePrimes(){
 	}
 	primes[0]=primes[1]=false;
 	primes[2]=true;
-	for(int i=2; i<=sqrt(1000000); i++){
+	for(int i=3; i<=sqrt(1000000); i+=2){
 		if(primes[i]){
-			for(int j=i; j*i<=1000000; j++){
-				primes[i*j]=false;
+			for(int j=i*i; j*i<=1000000; j+=i){
+				primes[j]=false;
 			}
 		}
 	}
@@ -24,6 +24,12 @@ int main() {
 	int n;
 	cin >> n;
 	generatePrimes();
+
+	// for(int i=0; i<n; i++){
+	// 	if(primes[i]){
+	// 		cout << i << " ";
+	// 	}
+	// }
 
 	while(n--){
 
@@ -38,6 +44,7 @@ int main() {
 
 		cout << count << endl;
 	}
+	// cout << endl;
 
 	return 0;
 }
