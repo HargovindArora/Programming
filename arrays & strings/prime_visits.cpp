@@ -25,7 +25,7 @@ int main() {
 	cin >> n;
 	generatePrimes();
 
-	// for(int i=0; i<n; i++){
+	// for(int i=0; i<1000000; i++){
 	// 	if(primes[i]){
 	// 		cout << i << " ";
 	// 	}
