@@ -1,5 +1,20 @@
 #include<iostream>
+#include<cstdlib>
+#include<ctime>
 using namespace std;
+
+
+void shuffle(int *a, int beg, int end){
+
+    srand(time(NULL));
+
+    int i, j, temp;
+    for(int i=end; i>0; i--){
+        j = rand()%(i+1);
+        swap(a[i], a[j]);
+    }
+
+}
 
 
 int partition(int *a, int beg, int end){
@@ -35,7 +50,8 @@ int main(){
 
     int a[] = {2, 1, 4, 6, 5, 7, 8};
     int n= sizeof(a)/sizeof(int);
-
+    shuffle(a, 0, n-1);
+    
     quicksort(a, 0, n-1);
 
     for(int i=0; i<n; i++){
