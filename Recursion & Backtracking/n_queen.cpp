@@ -9,10 +9,8 @@ bool isSafe(int board[][10], int i, int j, int n){
             return false;
         }
     }
-
     int x = i;
     int y = j;
-
     while(x>=0 && y>=0){
         if(board[x][y]==1){
             return false;
@@ -20,10 +18,8 @@ bool isSafe(int board[][10], int i, int j, int n){
         x--;
         y--;
     }
-
     x = i;
     y = j;
-
     while(x>=0 && y<n){
         if(board[x][y]==1){
             return false;
@@ -31,6 +27,7 @@ bool isSafe(int board[][10], int i, int j, int n){
         x--;
         y++;
     }
+
     return true;
 }
 
@@ -38,7 +35,6 @@ bool isSafe(int board[][10], int i, int j, int n){
 bool solveNQueen(int board[][10], int i, int n){
 
     if(i==n){
-
         for(int i=0; i<n; i++){
             for(int j=0; j<n; j++){
                 if(board[i][j]){
@@ -53,11 +49,9 @@ bool solveNQueen(int board[][10], int i, int n){
         cout << endl;
         return false;
     }
-
     for(int j=0; j<n; j++){
         if(isSafe(board, i, j, n)){
             board[i][j] = 1;
-
             bool nextQueenPlaced = solveNQueen(board, i+1, n);
             if(nextQueenPlaced){
                 return true;
@@ -65,6 +59,7 @@ bool solveNQueen(int board[][10], int i, int n){
             board[i][j] = 0;
         }
     }
+
     return false;
 }
 
@@ -73,7 +68,6 @@ int main(){
 
     int n;
     cin >> n;
-
     int board[10][10] = {0};
     solveNQueen(board, 0, n);
 

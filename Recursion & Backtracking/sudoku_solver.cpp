@@ -10,11 +10,9 @@ bool canPlace(int mat[][9], int i, int j, int n, int number){
             return false;
         }
     }
-
     int rn = sqrt(n);
     int sx = (i/rn)*rn;
     int sy = (j/rn)*rn;
-
     for(int x=sx; x<sx+rn; x++){
         for(int y=sy; y<sy+rn; y++){
             if(mat[x][y]==number){

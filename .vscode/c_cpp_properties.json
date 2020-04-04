@@ -5,6 +5,12 @@
             "includePath": [
                 "${workspaceFolder}/**"
             ],
+            "browse": {
+                "path": [
+                    "${workspaceRoot}",
+                    "C:\\MinGW\\lib\\gcc\\mingw32\\6.3.0\\include\\c++"
+                ]
+            },
             "defines": [
                 "_DEBUG",
                 "UNICODE",

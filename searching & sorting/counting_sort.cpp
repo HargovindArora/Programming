@@ -3,39 +3,41 @@
 #define MAX 1000000
 using namespace std;
 
-void countingSort(int a[], int n, int m){
 
-	int c[MAX] = {0}, b[MAX];
+void counting_sort(int *arr, int n){
 
-	for(int j=0; j<n; j++){
-		c[a[j]] = a[j]+1;
-	}
-	for(int j=1; j<=m; j++){
-		c[j] = c[j]+c[j-1];
-	}
-	for(int j=n-1; j>=0; j--){
-		b[c[a[j]]] = a[j];
-		c[a[j]] = c[a[j]]-1;
-	}
+	int largest = -1;
 	for(int i=0; i<n; i++){
-		cout << b[i] << " ";
+		largest = max(largest, arr[i]);
 	}
-	cout << endl;
+	int *freq = new int[largest+1]{0};
+	for(int i=0; i<n; i++){
+		freq[arr[i]]++;
+	}
+	int j=0; 
+	for(int i=0; i<=largest; i++){
+		while(freq[i]>0){
+			arr[j] = i;
+			freq[i]--;
+			j++;
+		}
+	}
+
 }
 
 int main() {
 
 	int n;
 	cin >> n;
-	int a[n];
-	int m;
-
+	int arr[1000];
 	for(int i=0; i<n; i++){
-		cin >> a[i];
-		m = max(m, a[i]);
+		cin >> arr[i];
 	}
-
-	countingSort(a, n, m);
+	counting_sort(arr, n);
+	for(int i=0; i<n; i++){
+		cout << arr[i] << " ";
+	}
+	cout << endl;
 
 	return 0;
 }

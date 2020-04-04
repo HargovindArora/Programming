@@ -7,15 +7,16 @@ bool ratInMaze(char maze[10][10], int soln[][10], int i, int j, int m, int n){
     if(i==m && j==n){
         soln[m][n] = 1;
 
-        for(int k=0; k<=m; k++){
-            for(int l=0; l<=n; l++){
-                cout << soln[k][l] << " ";
-            }
+        if(count==0){
+            for(int k=0; k<=m; k++){
+                for(int l=0; l<=n; l++){
+                    cout << soln[k][l] << " ";
+                }
             cout << endl;
+            }
         }
         count++;
         cout << endl;
-        
         return true;
     }
 
@@ -34,7 +35,7 @@ bool ratInMaze(char maze[10][10], int soln[][10], int i, int j, int m, int n){
 
     soln[i][j] = 0;
 
-    if(rightPath || downPath){
+    if((rightPath || downPath)){
         return true;
     }
     
