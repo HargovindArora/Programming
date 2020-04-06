@@ -1,10 +1,13 @@
 {
     "files.associations": {
+        "*.cpp": "cpp",
         "iostream": "cpp",
         "cmath": "cpp",
         "utility": "cpp",
         "algorithm": "cpp",
         "vector": "cpp",
-        "xstring": "cpp"
+        "xstring": "cpp",
+        "ostream": "cpp",
+        "cstring": "cpp"
     }
 }
