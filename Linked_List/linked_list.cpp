@@ -1,4 +1,5 @@
 #include<iostream>
+#define endl '\n'
 using namespace std;
 
 class node{
@@ -267,6 +268,64 @@ node* merge(node* a, node* b){
     return c;
 }
 
+node* mergeSort(node* head){
+
+    if(head==NULL || head->next==NULL){
+        return head;
+    }
+
+    node* mid = midPoint(head);
+
+    node* a = head;
+    node* b = mid->next;
+    mid->next = NULL;
+
+    a = mergeSort(a);
+    b = mergeSort(b);
+
+    node*c = merge(a, b);
+    return c;
+}
+
+bool detectCycle(node* head){
+
+    node* slow = head;
+    node* fast = head;
+
+    while(fast!=NULL && fast->next!=NULL){
+        fast = fast->next->next;
+        slow = slow->next;
+
+        if(fast==slow){
+            return true;
+        }
+    }
+    return false;
+}
+
+node* loopNode(node* head){
+
+    node* slow = head;
+    node* fast = head;
+
+    while(slow!=NULL && fast!=NULL && fast->next!=NULL){
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if(slow==fast){
+            fast = fast;
+            slow = head;
+
+            while(slow!=fast){
+                slow = slow->next;
+                fast = fast->next;
+            }
+            return slow;
+        }
+    }
+    return NULL;
+}
+
 int main(){
 
     // node* head=NULL;
@@ -317,10 +376,10 @@ int main(){
     node* head1 = NULL;
     node* head2 = NULL;
 
-    cin >> head1 >> head2;
-    cout << head1 << endl << head2 << endl;
+    cin >> head1;
+    cout << head1 << endl;
 
-    head1 = merge(head1, head2);
+    head1 = mergeSort(head1);
 
     cout << head1 << endl;
 
