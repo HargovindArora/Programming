@@ -31,19 +31,19 @@ int main() {
 	// 	}
 	// }
 
-	while(n--){
+	// while(n--){
 
-		int a,b,count=0;
-		cin >> a >> b;
+		// int a,b,count=0;
+		// cin >> n;
 
-		for(int i=a; i<=b; i++){
+		for(int i=1; i<=n; i++){
 			if(primes[i]){
-				count++;
+				cout << i << " ";
 			}
 		}
 
-		cout << count << endl;
-	}
+		cout <<  endl;
+	// }
 	// cout << endl;
 
 	return 0;
