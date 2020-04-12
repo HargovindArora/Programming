@@ -204,7 +204,7 @@ node* reverseRec(node* head){
         return head;
     }
     node* smallHead = reverseRec(head->next);
-    node*C = head;
+    node *C = head;
     C->next->next = C;
     C->next = NULL;
     return smallHead;
