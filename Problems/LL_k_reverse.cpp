@@ -36,18 +36,41 @@ void print(node *head){
     }
 }
 
+node *reversePartly(node *head, int k){
 
+    node *current = head;
+    node *next = NULL;
+    node *prev = NULL;
+    int count = 0;
+
+    while(current!=NULL && count<k){
+        next = current->next;
+        current->next = prev;
+        prev = current;
+        current = next;
+        count++;
+    }
+
+    if(next!=NULL){
+        head->next = reversePartly(next, k);
+    }
+
+    return prev;
+}
 
 int main(){
 
     int n, k;
     cin >> n >> k;
-
+    node *head = NULL;
     for(int i=1; i<=n; i++){
         int x;
         cin >> x;
-
+        insertAtTail(head, x);
     }
+    
+    node *head_new = reversePartly(head, k);
+    print(head_new);
 
     return 0;
 }
