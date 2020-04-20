@@ -43,6 +43,10 @@ public:
         return this->arr[this->front];
     }
 
+    int & operator [] (int i){
+        return arr[i];
+    }
+
 };
 
 int main(){
