@@ -1,5 +1,6 @@
 #include<iostream>
 #include<queue>
+#include<climits>
 using namespace std;
 
 class node{
@@ -83,11 +84,172 @@ void inorder(node *root){
     inorder(root->right);
 }
 
+bool search(node *root, int data){
+
+    if(root==NULL){
+        return false;
+    }
+    if(root->data==data){
+        return true;
+    }
+    if(data<=root->data){
+        return search(root->left, data);
+    }
+    else{
+        return search(root->right, data);
+    }
+
+}
+
+node *deleteInBst(node *root, int data){
+
+        if(root==NULL){
+            return NULL;
+        }
+        else if(data<root->data){
+            root->left = deleteInBst(root->left, data);
+            return root;
+        }
+        else if(data==root->data){
+
+            if(root->left==NULL && root->right==NULL){
+                delete root;
+                return NULL;
+            }
+            if(root->left!=NULL && root->right==NULL){
+                node *temp = root->left;
+                delete root;
+                return temp;
+            }
+            if(root->left==NULL && root->right!=NULL){
+                node *temp = root->right;
+                delete root;
+                return temp;
+            }
+            node *replace = root->right;
+            while(replace->left!=NULL){
+                replace = replace->left;
+            }
+            root->data = replace->data;
+            root->right = deleteInBst(root->right, replace->data);
+            return root;
+        }
+        else{
+            root->right = deleteInBst(root->right, data);
+            return root;
+        }
+
+}
+
+bool isBST(node *root, int minV = INT_MIN, int maxV = INT_MAX){
+
+    if(root==NULL){
+        return true;
+    }
+    if(root->data>=minV && root->data<=maxV && isBST(root->left, minV, root->data) && isBST(root->right, root->data, maxV)){
+        return true;
+    }
+    else{
+        return false;
+    }
+    
+}
+
+class LinkedList{
+
+    public:
+        node *head;
+        node *tail;
+};
+
+LinkedList flatten(node *root){
+
+    LinkedList l;
+    if(root==NULL){
+        l.head = l.tail = NULL;
+        return l;
+    }
+    if(root->left==NULL && root->right==NULL){
+        l.head = l.tail = root;
+        return l;
+    }
+    if(root->left!=NULL && root->right==NULL){
+        LinkedList leftll = flatten(root->left);
+        leftll.tail->right = root;
+        l.head = leftll.head;
+        l.tail = root;
+        return l;
+    }
+    if(root->left==NULL && root->right!=NULL){
+        LinkedList rightll = flatten(root->right);
+        root->right = rightll.head;
+        l.head = root;
+        l.tail = rightll.tail;
+        return l;
+    }
+    LinkedList leftll = flatten(root->left);
+    LinkedList rightll = flatten(root->right);
+    leftll.tail->right = root;
+    root->right = rightll.head;
+    l.head = leftll.head;
+    l.tail = rightll.tail;
+
+    return l;
+}
+
+node *createTreeFromTravesal(int *ino, int *pre, int beg, int end){
+
+    static int i=0;
+    if(beg>end){
+        return NULL;
+    }
+    node *root = new node(pre[i]);
+    int index = -1;
+    for(int j=beg; j<=end; j++){
+        if(ino[j]==pre[i]){
+            index = j;
+            break;
+        }
+    }
+    i++;
+    root->left = createTreeFromTravesal(ino, pre, beg, index-1);
+    root->right = createTreeFromTravesal(ino, pre, index+1, end);
+
+    return root;
+}
+
 int main(){
 
-    node *root = build();
+    // node *root = build();
+    // breadthFirstSearch(root);
+    // cout << endl;
+    // inorder(root);
+    // cout << endl;
+
+    // int s;
+    // cin >> s;
+    // root = deleteInBst(root, s);
+    // inorder(root);
+
+    // if(isBST(root)){
+    //     cout << "It is a BST\n";
+    // }
+    // else{
+    //     cout << "Not a BST\n";
+    // }
+
+    // LinkedList l = flatten(root);
+    // node *temp = l.head;
+    // while(temp!=NULL){
+    //     cout << temp->data << "-->";
+    //     temp = temp->right;
+    // }
+    // cout << endl;
+    int pre[] = {5, 3, 7, 1, 6, 8};
+    int ino[] = {1, 3, 5, 6, 7, 8};
+    int n = sizeof(ino)/sizeof(int);
+    node *root = createTreeFromTravesal(ino, pre, 0, n-1);
     breadthFirstSearch(root);
-    inorder(root);
 
     return 0;
 }
