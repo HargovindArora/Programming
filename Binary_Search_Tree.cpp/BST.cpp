@@ -197,7 +197,7 @@ LinkedList flatten(node *root){
     return l;
 }
 
-node *createTreeFromTravesal(int *ino, int *pre, int beg, int end){
+node *createTreeFromTraversal(int *ino, int *pre, int beg, int end){
 
     static int i=0;
     if(beg>end){
@@ -212,8 +212,8 @@ node *createTreeFromTravesal(int *ino, int *pre, int beg, int end){
         }
     }
     i++;
-    root->left = createTreeFromTravesal(ino, pre, beg, index-1);
-    root->right = createTreeFromTravesal(ino, pre, index+1, end);
+    root->left = createTreeFromTraversal(ino, pre, beg, index-1);
+    root->right = createTreeFromTraversal(ino, pre, index+1, end);
 
     return root;
 }
@@ -248,7 +248,7 @@ int main(){
     int pre[] = {5, 3, 7, 1, 6, 8};
     int ino[] = {1, 3, 5, 6, 7, 8};
     int n = sizeof(ino)/sizeof(int);
-    node *root = createTreeFromTravesal(ino, pre, 0, n-1);
+    node *root = createTreeFromTraversal(ino, pre, 0, n-1);
     breadthFirstSearch(root);
 
     return 0;
