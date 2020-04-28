@@ -245,8 +245,8 @@ int main(){
     //     temp = temp->right;
     // }
     // cout << endl;
-    int pre[] = {5, 3, 7, 1, 6, 8};
-    int ino[] = {1, 3, 5, 6, 7, 8};
+    int pre[] = {3, 2, 8, 4, 1, 6, 7, 5};
+    int ino[] = {1, 2, 3, 4, 5, 6, 7, 8};
     int n = sizeof(ino)/sizeof(int);
     node *root = createTreeFromTraversal(ino, pre, 0, n-1);
     breadthFirstSearch(root);
