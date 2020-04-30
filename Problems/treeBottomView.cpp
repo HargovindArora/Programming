@@ -50,22 +50,22 @@ void bottomViewOfTree(node *root){
     return;
 }
 
-node *buildLevelOrder(node *&root, int x, queue<node*> &q){
+// node *buildLevelOrder(node *&root, int x, queue<node*> &q){
 
-    node *temp = new node(x);
-    if(root==NULL){
-        root = temp;
-    }
-    else if(q.front()->left==NULL){
-        q.front()->left = temp;
-    }
-    else {
-        q.front()->right = temp;
-        q.pop();
-    }
-    q.push(temp);
-    return root;
-}
+//     node *temp = new node(x);
+//     if(root==NULL){
+//         root = temp;
+//     }
+//     else if(q.front()->left==NULL){
+//         q.front()->left = temp;
+//     }
+//     else {
+//         q.front()->right = temp;
+//         q.pop();
+//     }
+//     q.push(temp);
+//     return root;
+// }
 
 node *buildTree(){
 
