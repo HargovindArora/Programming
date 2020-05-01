@@ -11,80 +11,67 @@ class node{
         node(int d) : data(d), left(NULL), right(NULL){}
 };
 
-// node *buildTree(node *root){
+node *buildTree(){
 
-//     int x;
-//     cin >> x;
-//     root = new node(x);
-//     bool b;
-//     cin >> b;
-    
-//     if(b==false){
-//         root->left = NULL;
-//         cin >> b;
-//         if(b==false){
-//             root->right = NULL;
-//         }
-//         else{
-//             root->right = buildTree(root->right);
-//         }
-//     }
-//     else{
-//         root->left = buildTree(root->left);
-//         cin >> b;
-//         if(b==false){
-//             root->right = NULL;
-//         }
-//         else{
-//             root->right = buildTree(root->right);
-//         }
-//     }
-//     return root;
-// }
+    int x;
+    cin >> x;
+    node *root = new node(x);
 
-node * buildTree()
-{
-int cdata;
-cin>>cdata;
-node * root= new node(cdata);
-
-		// left
-		string hlc;
-        cin>>hlc;
-
-		if (hlc=="true") {
-			root->left = buildTree();
-		}
-
-		// right
-        string hrc;
-        cin>>hrc;
-
-		if (hrc=="true") {
-			root->right = buildTree();
-		}
-
-		// return
-		return root;
-}
-
-void preOrder(node *root){
-
-    if(root==NULL){
-        return;
+    string left;
+    cin >> left;
+    if(left=="true"){
+        root->left = buildTree();
     }
 
-    cout << root->data << " ";
-    preOrder(root->left);
-    preOrder(root->right);
+    string right;
+    cin >> right;
+    if(right=="true"){
+        root->right = buildTree();
+    }
 
+    return root;
+}
+
+class HBPair{
+
+    public:
+        int height;
+        bool balance;
+};
+
+HBPair isHeightBalanced(node *root){
+
+    HBPair p;
+    if(root==NULL){
+        p.height = 0;
+        p.balance = true;
+        return p;
+    }
+    //BottomUp Approach
+    HBPair left = isHeightBalanced(root->left);
+    HBPair right = isHeightBalanced(root->right);
+    //Self Work
+    p.height = max(left.height, right.height)+1;
+    if(abs(left.height-right.height)<=1 and left.balance and right.balance){
+        p.balance = true;
+    }
+    else{
+        p.balance = false;
+    }
+    return p;
 }
 
 int main(){
 
     node *root = NULL;
     root = buildTree();
-    preOrder(root);
+    HBPair p;
+    if(isHeightBalanced(root).balance){
+        cout << "true" << endl;
+    }
+    else{
+        cout << "false" << endl;
+    }
 
     return 0;
 }
