@@ -31,6 +31,55 @@ node *createTreeFromTraversal(int *ino, int *pre, int beg, int end){
     root->right = createTreeFromTraversal(ino, pre, index+1, end);
     return root;
 }
+vector<int> v;
+void printKdistanceNodeDown(node *root, int k){
+
+    if(root==NULL || k<0){
+        return;
+    }
+    if(k==0){
+        v.push_back(root->data);
+        return;
+    }
+    printKdistanceNodeDown(root->left, k-1);
+    printKdistanceNodeDown(root->right, k-1);
+
+}
+
+int printKDistanceNodes(node *root, int value, int k){
+
+    if(root==NULL){
+        return -1;
+    }
+    if(root->data==value){
+        printKdistanceNodeDown(root, k);
+        return 0;
+    }
+
+    int left = printKDistanceNodes(root->left, value, k);
+    if(left!=-1){
+        if(left+1==k){
+            v.push_back(root->data);
+        }
+        else{
+            printKdistanceNodeDown(root->right, k-left-2);
+        }
+        return 1+left;
+    }
+
+    int right = printKDistanceNodes(root->right, value, k);
+    if(right!=-1){
+        if(right+1==k){
+            v.push_back(root->data);
+        }
+        else{
+            printKdistanceNodeDown(root->left, k-right-2);
+        }
+        return 1+right;
+    }
+
+    return -1;
+}
 
 int main(){
 
@@ -44,6 +93,7 @@ int main(){
     for(int i=0; i<n; i++){
         cin >> ino[i];
     }
+    node *root = createTreeFromTraversal(ino, pre, 0, n-1);
     int t;
     cin >> t;
 
@@ -51,8 +101,17 @@ int main(){
 
         int value, k;
         cin >> value >> k;
-
-
+        v.clear();
+        printKDistanceNodes(root, value, k);
+        if(v.size()==0){
+            cout << "0" << endl;
+            continue;
+        }
+        sort(v.begin(), v.end());
+        for(auto x:v){
+            cout << x << " ";
+        }
+        cout << endl;
 
     }
 
