@@ -15,8 +15,9 @@ int main() {
         ll x, y, l, r;
         cin >> x >> y >> l >> r;
         int bits = floor(log2(max(x,y)))+1;
+        cout << bits << endl;
         if(l==0 && r>=2*max(x,y)){
-            ll ans = 2^bits-1;
+            ll ans = pow(2, bits)-1;
             cout << ans << endl;
             continue;
         }
