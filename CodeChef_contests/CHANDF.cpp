@@ -3,6 +3,23 @@
 #define ll long long int
 using namespace std;
 
+long long int fastpower(long long int a, ll b){
+
+    if(b==0){
+        return 1;
+    }
+    ll smallAns = (fastpower(a, b/2));
+    smallAns = ((smallAns)*(smallAns));
+
+    if(b&1){
+        return (a*smallAns);
+    }
+    else{
+        return (smallAns);
+    }
+
+}
+
 int main() {
 	
 	ios_base::sync_with_stdio(false); 
@@ -17,7 +34,7 @@ int main() {
         int bits = floor(log2(max(x,y)))+1;
         cout << bits << endl;
         if(l==0 && r>=2*max(x,y)){
-            ll ans = pow(2, bits)-1;
+            ll ans = fastpower(2, bits)-1;
             cout << ans << endl;
             continue;
         }
