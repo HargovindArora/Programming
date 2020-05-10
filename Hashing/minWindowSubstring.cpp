@@ -1,5 +1,6 @@
 #include<iostream>
 #include<climits>
+#include<bits/stdc++.h>
 using namespace std;
 
 string minWindowSubstring(string str, string pat){
@@ -45,7 +46,8 @@ string minWindowSubstring(string str, string pat){
 int main(){
 
     string s1, s2;
-    cin >> s1 >> s2;
+    getline(cin, s1);
+    getline(cin, s2);
     string ans = minWindowSubstring(s1, s2);
     cout << ans << endl;
     return 0;
