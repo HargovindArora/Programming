@@ -100,6 +100,8 @@ public :
         return false ;
     }
 };
+
+
 int main() {
     int q ;
     cin >> q;

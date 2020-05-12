@@ -22,6 +22,8 @@ int main(){
     priceMenu["Dosa"] = 60;
     priceMenu["Dosa"] += 10;
     cout << priceMenu["Dosa"] << endl;
+    priceMenu.erase("Pizza");
+    priceMenu.print();
 
     return 0;
 }

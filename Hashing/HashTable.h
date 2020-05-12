@@ -122,16 +122,28 @@ class Hashtable{
             return *f;
         }
 
-        // void erase(string key){
-        //     int idx = hashFun(key);
-        //     Node<T> *ptr = table[idx];
-        //     while(ptr!=NULL){
-        //         if(ptr->key==key){
-        //             break;
-        //         }
-        //         ptr = ptr->next;
-        //     }
-        //     // What is the case of deletion of Linked List
-        // }
+        void erase(string key){
+            int idx = hashFun(key);
+            Node<T> *ptr = table[idx];
+            while(ptr!=NULL){
+                if(ptr->key==key){
+                    break;
+                }
+                ptr = ptr->next;
+            }
+            if(ptr==table[idx]){
+                table[idx] = ptr->next;
+                delete ptr;
+            }
+            else{
+
+                Node<T> *pre = table[idx];
+                while(pre->next!=ptr){
+                    pre = pre->next;
+                }
+                pre->next = ptr->next;
+                delete ptr;
+            }
+        }
 
 };
