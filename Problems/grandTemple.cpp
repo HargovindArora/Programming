@@ -12,8 +12,13 @@ int main(){
     }
     sort(x, x+n);
     sort(y, y+n);
-    int dx = x[0];
-    int dy = y[0];
+    int dx = x[0]-1;
+    int dy = y[0]-1;
+    for(int i=1; i<n; i++){
+        dx = max(dx, x[i]-x[i-1]-1);
+        dy = max(dy, y[i]-y[i-1]-1);
+    }
+    cout << dx*dy << endl;
 
     return 0;
 }

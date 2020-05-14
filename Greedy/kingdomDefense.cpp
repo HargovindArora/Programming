@@ -23,7 +23,7 @@ int main(){
             dy = max(dy, y[i]-y[i-1]-1);
         }
         dx = max(dx, w-x[n-1]);
-        dy = max(dy, h-x[n-1]);
+        dy = max(dy, h-y[n-1]);
 
         cout << dx*dy << endl;
 
