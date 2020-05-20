@@ -37,7 +37,7 @@ class Graph{
             }
             set<pair<int, T>> s;
             dist[src] = 0;
-            s.insert(make_pair(0, src));
+            s.insert(make_pair(0, src)); // pair<Weight, Node>
             while(!s.empty()){
 
                 auto p = *(s.begin());
