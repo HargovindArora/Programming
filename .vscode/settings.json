@@ -9,6 +9,7 @@
         "xstring": "cpp",
         "ostream": "cpp",
         "cstring": "cpp",
-        "iosfwd": "cpp"
+        "iosfwd": "cpp",
+        "queue": "cpp"
     }
 }
