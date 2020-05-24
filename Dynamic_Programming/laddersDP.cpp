@@ -16,14 +16,42 @@ int laddersTopDown(int n, int k, int dp[]){
         }
     }
     return dp[n] = ways;
-}
+} // TC = O(n*k)
+
+int laddersBottomUp(int n, int k){
+
+    int dp[100] = {0};
+    dp[0] = 1;
+    for(int i=1; i<=n; i++){
+        dp[i] = 0;
+        for(int j=1; j<=k; j++){
+            if(i-j>=0){
+                dp[i] += dp[i-j];
+            }
+        }
+    }
+    return dp[n];
+} // TC = O(n*k)
+
+int laddersOptimizedBU(int n, int k){
+
+    int dp[n] = {0};
+    dp[0] = dp[1] = 1;
+    for(int i=2; i<=k; i++){
+        dp[i] = 2*dp[i-1];
+    }
+    for(int i=k+1; i<=n; i++){
+        dp[i] = 2*dp[i-1] - dp[i-k-1];
+    }
+    return dp[n];
+} // TC = O(N+K)
 
 int main(){
 
     int n, k;
     cin >> n >> k;
     int dp[n+1] = {0};
-    cout << laddersTopDown(n, k, dp) << endl;
+    cout << laddersOptimizedBU(n, k) << endl;
 
     return 0;
 }
