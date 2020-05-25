@@ -10,14 +10,15 @@ class graph{
     public:
         void addEdge(ll x, ll y){
             l[x].push_back(y);
+            l[y].push_back(x);
         }
 
         void dfsHelper(ll src, unordered_map<ll, bool> &visited,unordered_map<ll, ll> &children, unordered_map<ll, ll> &parent){
             visited[src] = true;
             for(ll nbr:l[src]){
-                children[src]++;
-                parent[nbr] = src;
                 if(!visited[nbr]){
+                    children[src]++;
+                    parent[nbr] = src;
                     dfsHelper(nbr, visited, children, parent);
                 }
             }
