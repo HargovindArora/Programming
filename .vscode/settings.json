@@ -10,6 +10,7 @@
         "ostream": "cpp",
         "cstring": "cpp",
         "iosfwd": "cpp",
-        "queue": "cpp"
+        "queue": "cpp",
+        "random": "cpp"
     }
 }

@@ -19,25 +19,24 @@ void lcsBottomUp(char X[1010], char Y[1010]){
             dp[i][j] = q;
         }
     }
-    cout << dp[m][n] << endl;
-    // int index = dp[m][n];
-    // int i=m, j=n;
-    // char lcs[index+1];
-    // lcs[index] = '\0';
-    // while(i>0 && j>0){
+    int index = dp[m][n];
+    int i=m, j=n;
+    char lcs[index+1];
+    lcs[index] = '\0';
+    while(i>0 && j>0){
 
-    //     if(x[i-1]==y[j-1]){
-    //         lcs[index-1] = x[i-1];
-    //         i--, j--, index--;
-    //     }
-    //     else if(dp[i-1][j]>=dp[i][j-1]){
-    //         i--;
-    //     }
-    //     else{
-    //         j--;
-    //     }
-    // }
-    // cout << lcs << endl;
+        if(X[i-1]==Y[j-1]){
+            lcs[index-1] = X[i-1];
+            i--, j--, index--;
+        }
+        else if(dp[i-1][j]>=dp[i][j-1]){
+            i--;
+        }
+        else{
+            j--;
+        }
+    }
+    cout << lcs << endl;
 }
 
 int main(){
