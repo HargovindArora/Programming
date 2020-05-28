@@ -4,22 +4,34 @@ using namespace std;
 int kOrderedLCS(int *a, int *b, int n, int m, int k){
 
     int dp[n+1][m+1][k+1] = {0};
-    int x=0;
+    for(int i=1; i<=n; i++){
+        for(int j=1; j<=m; j++){
+            int q=0;
+            if(i == 0 || j == 0) 
+                dp[i][j][0] = 0;
+            if(a[i-1]==b[j-1]){
+                q = 1+dp[i-1][j-1][0];
+            }
+            else{
+                q = max(dp[i-1][j][0], dp[i][j-1][0]);
+            }
+            dp[i][j][0] = q;
+        }
+    }
     for(int i=0; i<=n; i++){
         for(int j=0; j<=m; j++){
                 
-            if(i == 0 || j == 0) 
-                dp[i][j][x] = 0;
-            else if(a[i-1]==b[j-1]){
-                dp[i][j][x] = 1+dp[i-1][j-1][x];
-            }
-            else if(a[i-1]!=b[j-1]){
-                dp[i][j][x] = max(dp[i-1][j][x], dp[i][j-1][x]);
-                if(dp[i-1][j-1][x-1]+1>dp[i][j][x] && x<k){
-                    dp[i][j][x] = dp[i-1][j-1][x-1]+1;
-                    x++;
+            for(int x=1; x<=k; x++){
+                if(i == 0 || j == 0) 
+                    dp[i][j][x] = 0;
+                else if(a[i-1]==b[j-1]){
+                    dp[i][j][x] = max(1+dp[i-1][j-1][x], dp[i][j][x]);
                 }
+                else if(a[i-1]!=b[j-1]){
+                    dp[i][j][x] = max(dp[i-1][j-1][x-1]+1, dp[i][j][x]);
+                } 
             }
+
         }
     }
     return dp[n][m][k];
