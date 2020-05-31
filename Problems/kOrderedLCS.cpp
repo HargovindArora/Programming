@@ -1,57 +1,68 @@
-#include<iostream>
+# include <bits/stdc++.h>
 using namespace std;
-
-int kOrderedLCS(int *a, int *b, int n, int m, int k){
-
-    int dp[n+1][m+1][k+1] = {0};
-    for(int i=1; i<=n; i++){
-        for(int j=1; j<=m; j++){
-            int q=0;
-            if(i == 0 || j == 0) 
-                dp[i][j][0] = 0;
-            if(a[i-1]==b[j-1]){
-                q = 1+dp[i-1][j-1][0];
-            }
-            else{
-                q = max(dp[i-1][j][0], dp[i][j-1][0]);
-            }
-            dp[i][j][0] = q;
-        }
+typedef long long int ll;
+typedef pair<int, int> pii;
+typedef pair<ll, ll> pll;
+# define FOR(i, n) for (ll i = 0; i < n; i++)
+# define FORI(i, n) for (ll i = 1; i <= n; i++)
+#define REP(i, a, b) for(ll i =a; i<=b;i++)
+#define RREP(i, a, b) for(ll i =a; i>=b;i--)
+#define vi vector<int>
+#define vvi vector<vector<int>>
+# define all(v) v.begin(), v.end()
+# define dbg(x) cout << #x << "=" << x << endl;
+# define mp make_pair
+#define mod 1000000007
+# define pb push_back
+# define MAX 2001
+#define fi first
+#define se second
+    
+int n, m, l;
+vector<long long int > v(MAX);
+vector<long long int > w(MAX);
+long long int dp[MAX][MAX][6];
+    
+void solve(){
+    FOR(i,n)
+    {
+        dp[i][0][0]=0;
+        dp[0][i][0]=0;
     }
-    for(int i=0; i<=n; i++){
-        for(int j=0; j<=m; j++){
-                
-            for(int x=1; x<=k; x++){
-                if(i == 0 || j == 0) 
-                    dp[i][j][x] = 0;
-                else if(a[i-1]==b[j-1]){
-                    dp[i][j][x] = max(1+dp[i-1][j-1][x], dp[i][j][x]);
-                }
-                else if(a[i-1]!=b[j-1]){
-                    dp[i][j][x] = max(dp[i-1][j-1][x-1]+1, dp[i][j][x]);
-                } 
-            }
 
-        }
+    FORI(i, n)
+    FORI(j, m)
+    {
+    if (v[i-1]==w[j-1])
+    {
+        dp[i][j][0]=dp[i-1][j-1][0]+1;
     }
-    return dp[n][m][k];
+    else
+        dp[i][j][0]=max(dp[i-1][j][0], dp[i][j-1][0]);
+    }
+    // cout << dp[n][m][0] << endl;
+    
+    FORI(i, n)
+    FORI(j, m)
+    FORI(k, l)
+    {
+        long long m1 = max(dp[i-1][j][k], dp[i][j-1][k]);
+        if (v[i-1]==w[j-1])
+            dp[i][j][k]=max(m1,dp[i-1][j-1][k]+1);
+        else
+            dp[i][j][k]=max(m1, dp[i-1][j-1][k-1]+1);
+    }
+    cout << dp[n][m][l] << endl;
 }
-
-int main(){
-
-    int n, m, k;
-    cin >> n >> m >> k;
-    int a[n];
-    for(int i=0; i<n; i++){
-        cin >> a[i];
-    }
-    int b[n];
-    for(int i=0; i<m; i++){
-        cin >> b[i];
-    }
-    cout << kOrderedLCS(a, b, n, m, k) << endl;
-
-    return 0;
+    
+int main()
+{
+    cin>>n >> m >> l;
+    FOR(i, n)
+        cin >> v[i];
+    FOR(i, m)
+        cin >> w[i];
+    solve();
 }
 
 // #include <iostream>
