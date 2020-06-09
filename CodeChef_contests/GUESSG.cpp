@@ -9,72 +9,110 @@ void solve()
     int n;
     cin >> n;
 
-    int beg = 1, end = n, i = 0;
-    int beg_p = beg, end_p = end;
+    int beg = 1, end = n;
     char c1, c2;
-    while (1)
+    int i = 0;
+    while (beg <= end)
     {
 
+        int m = (beg + end) / 2;
+        cout << m << endl;
         if (i % 2 == 0)
         {
-            int m = (beg + end) / 2;
-            cout << m << endl;
             cin >> c1;
             if (c1 == 'E')
             {
                 return;
             }
-            if (c1 == 'L')
-            {
-                end = m - 1;
-                if (beg == end)
-                {
-                    end = end_p;
-                    beg = beg_p;
-                }
-                continue;
-            }
-            if (c1 == 'G')
-            {
-                beg = m + 1;
-                if (beg == end)
-                {
-                    beg = beg_p;
-                    end = end_p;
-                }
-            }
         }
-        else
+        if (i % 2 != 0)
         {
-            int m = (beg_p + end_p) / 2;
-            cout << m << endl;
             cin >> c2;
-            if (c2 == 'E')
+            if (c1 == c2)
             {
-                return;
-            }
-            if (c2 == 'L')
-            {
-                end_p = m - 1;
-                if (beg == end)
+                if (c1 == 'E')
                 {
-                    beg = beg_p;
-                    end = end_p;
+                    return;
                 }
-                continue;
-            }
-            if (c2 == 'G')
-            {
-                beg_p = m + 1;
-                if (beg == end)
+                else if (c1 == 'G')
                 {
-                    beg = beg_p;
-                    end = end_p;
+                    beg = m + 1;
+                }
+                else
+                {
+                    end = m - 1;
+                }
+            }
+            else
+            {
+                if (c1 == 'E')
+                {
+                    return;
+                }
+                else if (c1 == 'G')
+                {
+                    beg = m + 1;
+                }
+                else
+                {
+                    end = m - 1;
                 }
             }
         }
         i++;
     }
+    i = 0;
+    beg = 1, end = n;
+    while (beg <= end)
+    {
+
+        int m = (beg + end) / 2;
+        cout << m << endl;
+        if (i % 2 == 0)
+        {
+            cin >> c1;
+            if (c1 == 'E')
+            {
+                return;
+            }
+        }
+        if (i % 2 != 0)
+        {
+            cin >> c2;
+            if (c1 == c2)
+            {
+                if (c1 == 'E')
+                {
+                    return;
+                }
+                else if (c1 == 'G')
+                {
+                    beg = m + 1;
+                }
+                else
+                {
+                    end = m - 1;
+                }
+            }
+            else
+            {
+                if (c2 == 'E')
+                {
+                    return;
+                }
+                else if (c2 == 'G')
+                {
+                    beg = m + 1;
+                }
+                else
+                {
+                    end = m - 1;
+                }
+            }
+        }
+        i++;
+    }
+
     return;
 }
 
