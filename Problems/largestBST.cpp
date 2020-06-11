@@ -179,6 +179,6 @@ int main()
     }
     node *root = createTreeFromTrav(inOrder, preOrder, 0, n - 1);
 
-    cout << greatestBSTinBT(root).maxBSTsize;
+    cout << greatestBSTinBT(root).maxBSTsize << endl;
     return 0;
 }
