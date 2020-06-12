@@ -1,16 +1,19 @@
-#include<iostream>
-#include<set>
+#include <iostream>
+#include <set>
 using namespace std;
 
-class PersonCompare{
+class PersonCompare
+{
 
-    public:
-        bool operator () (pair<char, int> p1, pair<char, int> p2){
-            return p1.second<p2.second;
-        }
+public:
+    bool operator()(pair<char, int> p1, pair<char, int> p2)
+    {
+        return p1.second < p2.second;
+    }
 };
 
-int main(){
+int main()
+{
 
     pair<char, int> p1 = make_pair('A', 369);
     pair<char, int> p2 = make_pair('C', 36);
@@ -26,7 +29,8 @@ int main(){
     m.insert(p2);
     m.insert(p5);
 
-    for(auto x:m){
+    for (auto x : m)
+    {
         cout << x.first << " " << x.second << endl;
     }
     cout << endl;
