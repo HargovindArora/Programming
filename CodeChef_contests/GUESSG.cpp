@@ -3,126 +3,108 @@
 #define endl '\n'
 using namespace std;
 
-void solve()
-{
-
-    int n;
-    cin >> n;
-
-    int beg = 1, end = n;
-    char c1, c2;
-    int i = 0;
-    while (beg <= end)
-    {
-
-        int m = (beg + end) / 2;
-        cout << m << endl;
-        if (i % 2 == 0)
-        {
-            cin >> c1;
-            if (c1 == 'E')
-            {
-                return;
-            }
-        }
-        if (i % 2 != 0)
-        {
-            cin >> c2;
-            if (c1 == c2)
-            {
-                if (c1 == 'E')
-                {
-                    return;
-                }
-                else if (c1 == 'G')
-                {
-                    beg = m + 1;
-                }
-                else
-                {
-                    end = m - 1;
-                }
-            }
-            else
-            {
-                if (c1 == 'E')
-                {
-                    return;
-                }
-                else if (c1 == 'G')
-                {
-                    beg = m + 1;
-                }
-                else
-                {
-                    end = m - 1;
-                }
-            }
-        }
-        i++;
-    }
-    i = 0;
-    beg = 1, end = n;
-    while (beg <= end)
-    {
-
-        int m = (beg + end) / 2;
-        cout << m << endl;
-        if (i % 2 == 0)
-        {
-            cin >> c1;
-            if (c1 == 'E')
-            {
-                return;
-            }
-        }
-        if (i % 2 != 0)
-        {
-            cin >> c2;
-            if (c1 == c2)
-            {
-                if (c1 == 'E')
-                {
-                    return;
-                }
-                else if (c1 == 'G')
-                {
-                    beg = m + 1;
-                }
-                else
-                {
-                    end = m - 1;
-                }
-            }
-            else
-            {
-                if (c2 == 'E')
-                {
-                    return;
-                }
-                else if (c2 == 'G')
-                {
-                    beg = m + 1;
-                }
-                else
-                {
-                    end = m - 1;
-                }
-            }
-        }
-        i++;
-    }
-
-    return;
-}
-
 int main(void)
 {
     ios_base::sync_with_stdio(false);
     cin.tie(NULL);
     cout.tie(NULL);
 
-    solve();
+    // solve();
+
+    int n;
+    cin >> n;
+    ll beg = 1, end = n;
+    char c1, c2;
+    int i=1;
+    bool flag=false;
+   
+    cout << 1;
+    cin >> c1;
+    if(c1=='L'){
+        flag = true;
+    }
+    else{
+        cout << 1;
+        cin >> c1;
+        if(c1=='L'){
+            flag=false;
+        }
+        else{
+            cout << n;
+            cin >> c1;
+            if(c1=='G'){
+                flag=true;
+            }
+            else{
+                cout << n;
+                cin >> c1;
+                if(c1=='G'){
+                    flag=false;
+                }
+                else{
+                    flag=true;
+                }
+            }
+        }
+    }
+    i++;
+    if(flag){
+        while(beg<=end){
+
+            if(flag && i%2==0){
+                ll mid = (beg+end)/2;
+                cout <<mid;
+                cin >> c2;
+                if(c2=='E'){
+                    break;
+                }
+                else if(c2=='G'){
+                    beg = mid+1;
+                }
+                else if(c2=='L'){
+                    end = mid-1;
+                }
+            }
+            else{
+                ll mid = (beg+end)/2;
+                cout <<mid;
+                cin >> c2;
+                if(c2=='E'){
+                    break;
+                }
+            }
+        }
+        i++;
+    }
+    else{
+        while(beg<=end){
+
+            if(!flag && i%2!=0){
+                ll mid = (beg+end)/2;
+                cout <<mid;
+                cin >> c2;
+                if(c2=='E'){
+                    break;
+                }
+                else if(c2=='G'){
+                    beg = mid+1;
+                }
+                else if(c2=='L'){
+                    end = mid-1;
+                }
+            }
+            else{
+                ll mid = (beg+end)/2;
+                cout <<mid;
+                cin >> c2;
+                if(c2=='E'){
+                    break;
+                }
+            }
+        }
+        i++;
+    }
 
     return 0;
+
 }
