@@ -6,21 +6,21 @@ using namespace std;
 void solve()
 {
 
-    int p, t;
-    cin >> p >> t;
-    int arr[10000] = {0};
+    int person, transaction;
+    cin >> person >> transaction;
+    int balance[10000] = {0};
 
-    for (int i = 0; i < t; i++)
+    for (int i = 0; i < transaction; i++)
     {
         int p1, p2, amount;
         cin >> p1 >> p2 >> amount;
-        arr[p1] -= amount;
-        arr[p2] += amount;
+        balance[p1] -= amount;
+        balance[p2] += amount;
     }
     multiset<pair<int, int>> s;
-    for (int i = 0; i < p; i++)
+    for (int i = 0; i < person; i++)
     {
-        s.insert(make_pair(arr[i], i));
+        s.insert(make_pair(balance[i], i));
     }
 
     while (!s.empty())
@@ -59,13 +59,6 @@ int main(void)
     cin.tie(NULL);
     cout.tie(NULL);
 
-    // int t;
-    // cin >> t;
-    // while (t--)
-    // {
-
-    //     solve();
-    // }
     solve();
 
     return 0;
