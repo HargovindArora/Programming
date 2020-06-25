@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 
+//  Time Complexity O(N^2)
 int lisBottomUp(int arr[100], int n){
 
     int dp[101];
