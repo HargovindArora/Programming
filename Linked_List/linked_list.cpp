@@ -200,7 +200,7 @@ void reverse(node* &head){
 
 node* reverseRec(node* head){
 
-    if(head->next==NULL || head==NULL){
+    if(head==NULL || head->next==NULL){
         return head;
     }
     node* smallHead = reverseRec(head->next);
