@@ -5,33 +5,43 @@ using namespace std;
 
 void solve(){
     
-    int n;
+    ll n;
     cin >> n;
-    int a[n], b[n];
-    int minma = INT_MAX, minmb = INT_MAX, maxm = INT_MIN;
-    map<int, int> mp;
-    for(int i=0; i<n; i++){
+    ll a[n], b[n];
+    ll minma = INT_MAX, minmb = INT_MAX, maxma = INT_MIN, maxmb = INT_MIN;
+    map<ll, ll> map_a, map_b, mp;
+    
+    for(ll i=0; i<n; i++){
         cin >> a[i];
+        map_a[a[i]]++;
         mp[a[i]]++;
         minma = min(minma, a[i]);
-        maxm = max(maxm, a[i]);
+        maxma = max(maxma, a[i]);
     }
-    for(int i=0; i<n; i++){
+    for(ll i=0; i<n; i++){
         cin >> b[i];
-        mp[b[i]]--;
+        map_b[b[i]]++;
+        mp[b[i]]++;
         minmb = min(minmb, b[i]);
-        maxm = max(maxm, b[i]);
+        maxmb = max(maxmb, b[i]);
     }
 
-    for(int i=0; i<=maxm; i++){
-        if(mp[i]%2!=0){
+    ll minm = min(minma, minmb);
+    ll maxm = max(maxma, maxmb);
+
+    for(auto x:mp){
+        if(x.second%2!=0){
             cout << -1 << endl;
             return;
         }
     }
-    int flag=1;
-    for(int i=0; i<maxm; i++){
-        if(mp[i]!=0){
+
+    bool flag=1;
+    sort(a, a+n);
+    sort(b, b+n);
+
+    for(ll i=0; i<n; i++){
+        if(a[i] != b[i]){
             flag = 0;
             break;
         }
@@ -41,33 +51,37 @@ void solve(){
         return;
     }
 
-    int x = n/2;
-    if(x%2==0){
-        if(minma<minmb){
-            ll ans = x*minma;
-            if(x>1){
-                ans += minma;
-            }
-            cout << ans << endl;
+    vector<ll> diff;
+    for(auto x:mp){
+        if(map_a[x.first] == map_b[x.first]){
+            continue;
         }
         else{
-            ll ans = x*minmb;
-            if(x>1){
-                ans += minmb;
+            ll count = abs(map_a[x.first]-map_b[x.first])/2;
+            while(count--){
+                diff.push_back(x.first);
             }
-            cout << ans << endl;
         }
+    }
+
+    ll ans = 0;
+    sort(diff.begin(), diff.end());
+    if((diff.size())%2!=0){
+        cout << -1 << endl;
+        return;
     }
     else{
-        if(minma<minmb){
-            ll ans = x*minma+minmb;
-            cout << ans << endl;
-        }
-        else{
-            ll ans = x*minmb + minma;
-            cout << ans << endl;
+        for(ll i=0; i<diff.size()/2; i++){
+            if(diff[i]>2*minm){
+                ans += 2*minm;
+            }
+            else{
+                ans += diff[i];
+            }
         }
     }
+
+    cout << ans << endl;
 
     return;    
 }
