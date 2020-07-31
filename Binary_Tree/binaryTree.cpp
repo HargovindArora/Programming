@@ -111,7 +111,7 @@ void breadthFirstSearch(node *root){
     while(!q.empty()){
         node *val = q.front();
         if(val==NULL){
-            cout << endl;
+            cout << endl; // New Level
             q.pop();
             if(!q.empty()){
                 q.push(NULL);
@@ -260,6 +260,60 @@ node *createTreeFromTraversal(int *ino, int *pre, int beg, int end){
     root->right = createTreeFromTraversal(ino, pre, index+1, end);
 
     return root;
+}
+
+class Pair2{
+    public:
+        int branchSum;
+        int maxSum;
+
+        Pair2(){
+            branchSum = 0;
+            maxSum = 0;
+        }
+};
+
+Pair2 maxSumPath(node *root){
+
+    Pair2 p;
+    if(root == NULL){
+        return p;
+    }
+
+    Pair2 left = maxSumPath(root->left);
+    Pair2 right = maxSumPath(root->right);
+
+    int op1 = root->data;
+    int op2 = root->data + left.branchSum;
+    int op3 = root->data + right.branchSum;
+    int op4 = left.branchSum + root->data + right.branchSum; 
+
+    int current_ans_through_root = max(op1, max(op2, max(op3, op4)));
+    p.branchSum = max(left.branchSum, max(right.branchSum, 0)) + root->data;
+    p.maxSum = max(left.maxSum, max(right.maxSum, current_ans_through_root));
+    return p;
+}
+
+node *lca(node *root, int a, int b){
+
+    if(root==NULL){
+        return NULL;
+    }
+    if(root->data==a or root->data==b){
+        return root;
+    }
+
+    node *leftans = lca(root->left, a, b);
+    node *rightans = lca(root->right, a, b);
+
+    if(leftans!=NULL and rightans!=NULL){
+        return root;
+    }
+
+    if(leftans!=NULL){
+        return leftans;
+    }
+    return rightans;
 }
 
 int main(){
