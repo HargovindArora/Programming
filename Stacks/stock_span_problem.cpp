@@ -3,17 +3,19 @@
 #define endl '\n'
 using namespace std;
 
-void printSpan(int arr[], int n){
+void printSpan(int price[], int n){
 
     stack<int> s;
     int ans[n];
-    for(int day=0; day<n; day++){
+    s.push(0);
+    ans[0] = 1;
+    for(int day=1; day<=n-1; day++){
 
-        int curPrice = arr[day];
-        while(s.empty()==false && arr[s.top()] < curPrice){
+        int curPrice = price[day];
+        while(s.empty()==false && price[s.top()] <= curPrice){
             s.pop();
         }
-        int betterDay = s.empty()? 0:s.top();
+        int betterDay = s.empty()? -1:s.top();
         int span = day - betterDay;
         s.push(day);
         ans[day] = span;
@@ -28,9 +30,9 @@ void printSpan(int arr[], int n){
 int main(){
 
     int n = 7;
-    int arr[100] = {100, 80, 60, 70, 60, 75, 85};
+    int price[100] = {100, 80, 60, 70, 60, 75, 85};
 
-    printSpan(arr, n);
+    printSpan(price, n);
 
     return 0;
 }

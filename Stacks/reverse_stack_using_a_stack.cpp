@@ -23,7 +23,6 @@ void reverseStack(stack<int> &s1){
         s1.push(x);
         transfer(s2, s1, n-i-1);
     }
-
 }
 
 int main(){

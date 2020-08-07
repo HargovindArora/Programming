@@ -170,6 +170,18 @@ void makeList(node* &head){
     }
 }
 
+node *makeListReturn(){
+
+    node *head = NULL;
+    int data;
+    cin >> data;
+    while(data!=-1){
+        insertAtHead(head, data);
+        cin >> data;
+    }
+    return head;
+}
+
 istream& operator >> (istream &is, node* &head){
     makeList(head);
     return is;
@@ -204,9 +216,8 @@ node* reverseRec(node* head){
         return head;
     }
     node* smallHead = reverseRec(head->next);
-    node *C = head;
-    C->next->next = C;
-    C->next = NULL;
+    head->next->next = head;
+    head->next = NULL;
     return smallHead;
 }
 
