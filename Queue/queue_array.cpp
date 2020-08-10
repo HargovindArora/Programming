@@ -35,7 +35,7 @@ public:
     void dequeue(){
         if(!isEmpty()){
             this->front = (this->front+1)%this->ms;
-            this->cs-=1;
+            this->cs -= 1;
         }
     }
 
@@ -45,6 +45,13 @@ public:
 
     int & operator [] (int i){
         return arr[i];
+    }
+
+    ~Queue() {
+        if(arr != NULL){
+            delete [] arr;
+            arr = NULL;
+        }
     }
 
 };
