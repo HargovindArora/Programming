@@ -136,7 +136,6 @@ class Hashtable{
                 delete ptr;
             }
             else{
-
                 Node<T> *pre = table[idx];
                 while(pre->next!=ptr){
                     pre = pre->next;
@@ -145,5 +144,4 @@ class Hashtable{
                 delete ptr;
             }
         }
-
 };
