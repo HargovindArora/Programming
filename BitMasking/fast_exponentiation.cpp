@@ -5,7 +5,7 @@ int raise_to(int a, int n){
     int ans = 1;
 
     while(n>0){
-        int last_bit = n&1;
+        int last_bit = n&1; // Bitwise And to Detect Last set bit
         if(last_bit){
             ans = ans*a;
         }
