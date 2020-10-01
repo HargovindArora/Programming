@@ -26,8 +26,8 @@ TreeNode *createTreeFromTraversal(int *ino, int *pre, int beg, int end){
         }
     }
     i++;
-    root->left = createTreeFromTraversal(ino, pre, beg, index-1);
-    root->right = createTreeFromTraversal(ino, pre, index+1, end);
+    root->left = createTreeFromTraversal(ino, pre, beg, index-1); // Creating Tree's Left node
+    root->right = createTreeFromTraversal(ino, pre, index+1, end); // Creating Tree's Right node
     return root;
 }
 
