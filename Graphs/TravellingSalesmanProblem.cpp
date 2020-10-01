@@ -11,7 +11,7 @@ int dist[10][10] = {
 };
 int dp[10][10];
 
-int VISITED_ALL = (1<<n)-1;
+int VISITED_ALL = (1<<n)-1; // Total no. of combination of nodes possible
 
 int tsp(int mask, int location){
 
