@@ -30,4 +30,4 @@
 *.out
 *.app
 
-*.vscode
+/.vscode
