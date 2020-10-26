@@ -1,26 +1,50 @@
-#include<bits/stdc++.h>
-#define ll long long int
-#define endl '\n' 
+#include <iostream>
 using namespace std;
+int main() {
+    
+    int num, mat[5][5];
+    int n=5;
+    for(int i=0; i<n; i++){
+        for(int j=0; j<n; j++){
+            int x;
+            cin >> x;
+            mat[i][j] = x;
+        }
+    }
+    int rank;
+    cin >> num;
+    if(num < mat[0][0]){
+        cout << n*n+1 << endl;
+        return 0;
+    }
+    if(num == mat[0][0]){
+        cout << n*n << endl;
+        return 0;
+    }
+    if(num >= mat[n-1][n-1]){
+        cout << 1 << endl;
+        return 0;
+    }
 
-void solve(){
-	
-	
-	
-}
+    int i=0, j=n-1, count=0;
+    while(i<n and j>=0){
 
-int main(void){
-	ios_base::sync_with_stdio(false);
-	cin.tie(NULL);
-	cout.tie(NULL);
-	
-	int t;
-	cin >> t;
-	while(t--){
-		
-		solve();
-		
-	}
+        if(mat[i][j]>num){
+            j--;
+            continue;
+        }
+        if(mat[i][j]<=num){
+            count += (n-j-1);
+            i++;
+        }
+    }
 
-	return 0;
+    if(i!=n){
+        int ext = (n-i)*n;
+        count += ext;
+    }
+
+    cout << count+1 << endl;
+
+    return 0;
 }
