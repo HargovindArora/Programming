@@ -9,7 +9,7 @@ int dist[10][10] = {
                     {42, 30, 0, 10},
                     {25, 34, 10, 0}
 };
-int dp[10][10];
+int dp[16][4];
 
 int VISITED_ALL = (1<<n)-1; // Total no. of combination of nodes possible
 
@@ -33,7 +33,7 @@ int tsp(int mask, int location){
 
 int main(){
 
-    for(int i=0; i<n; i++){
+    for(int i=0; i<(1<<n); i++){
         for(int j=0; j<n; j++){
             dp[i][j] = -1;
         }

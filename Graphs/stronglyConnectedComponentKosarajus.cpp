@@ -43,13 +43,14 @@ int main(){
         gr[x].push_back(y);
         grr[y].push_back(x);
     }
+    memset(vis, 0, sizeof(vis));
     for(int i=1; i<=n ;i++){
         if(!vis[i]){
             dfs(i);
         }
     }
-    memset(vis, 0, sizeof(vis));
     int col = 1;
+    memset(vis, 0, sizeof(vis));
     for(int i=n; i>=1; i--){
         if(!vis[order[i]]){
             dfs_reverse(order[i], col);
@@ -57,7 +58,7 @@ int main(){
         }
     }
     for(int i=1; i<=n; i++){
-        cout << i << " -> " << comp[i] << '\n';
+        cout << i << " -> " << --comp[i] << '\n';
     }
 
     return 0;

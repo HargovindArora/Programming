@@ -42,7 +42,6 @@ class Graph{
                     count++;
                     cout << endl;
                 }
-                
             }
         }
 };
