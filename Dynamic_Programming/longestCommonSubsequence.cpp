@@ -1,6 +1,23 @@
 #include<iostream>
 #include<cstring>
+#include<vector>
 using namespace std;
+
+int lcsTopDown(string s1, string s2, int i, int j, vector<vector<int>> &dp){
+
+    if(i==s1.length() or j==s2.length()) return 0;
+
+    if(dp[i][j]!=-1){
+        return dp[i][j] = 0;
+    }
+
+    if(s1[i]==s2[j]) return dp[i][j] = 1+lcsTopDown(s1, s2, i+1, j+1, dp);
+
+    int op1 = lcsTopDown(s1, s2, i+1, j, dp);
+    int op2 = lcsTopDown(s1, s2, i, j+1, dp);
+
+    return dp[i][j] = max(op1, op2);
+}
 
 int lcsBottomUp(char X[1010], char Y[1010]){
 
@@ -24,9 +41,15 @@ int lcsBottomUp(char X[1010], char Y[1010]){
 
 int main(){
 
-    char str1[1010], str2[1010];
+    string str1, str2;
     cin >> str1 >> str2;
-    int ans = lcsBottomUp(str1, str2);
+
+    int n1 = str1.length();
+    int n2 = str2.length();
+
+    vector<vector<int>> dp(n1+1, vector<int>(n2+1, -1));
+
+    int ans = lcsTopDown(str1, str2, 0, 0, dp);
     cout << ans << endl;
 
     return 0;

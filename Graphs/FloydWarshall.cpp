@@ -33,7 +33,7 @@ int main(){
                                 };
 
     auto result = floyd_warshall(graph);
-    for(int i=0; i<result; i++){
+    for(int i=0; i<result.size(); i++){
         for(int j=0; j<result.size(); j++){
             cout << result[i][j] << " ";
         }
