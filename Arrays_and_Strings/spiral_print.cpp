@@ -38,13 +38,13 @@ void spiralPrint(int a[][10], int r, int c){
         }
         endCol--;
 
-        if(startRow<endRow){
+        if(startRow<=endRow){
             for(int j=endCol; j>=startCol; j--){
                 cout << a[endRow][j] << ", ";
             }
             endRow--;
         }   
-        if(startCol<endCol){
+        if(startCol<=endCol){
             for(int i=endRow; i>=startRow; i--){
                 cout << a[i][startCol] << ", ";
             }
